@@ -8,10 +8,10 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { useNavigate } from 'react-router-dom';
 
 export default function SimpleBottomNavigation() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState<number>(0);
   const navigate = useNavigate();
 
-  const handleNavigationChange = (newValue: React.SetStateAction<number>) => {
+  const handleNavigationChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     switch (newValue) {
       case 0:
