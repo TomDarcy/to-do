@@ -14,6 +14,7 @@ export default {
         deepRed: '#752228',
         pinkishRed: '#A3232B',
         yellow: '#F2C280',
+        deepGreen: '#1a1F18',
         grey: '#2C2921',
       },
     },
