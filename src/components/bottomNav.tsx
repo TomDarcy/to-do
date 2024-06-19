@@ -11,7 +11,7 @@ export default function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
 
-  const handleNavigationChange = (event, newValue) => {
+  const handleNavigationChange = (newValue: React.SetStateAction<number>) => {
     setValue(newValue);
     switch (newValue) {
       case 0:
