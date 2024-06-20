@@ -1,11 +1,13 @@
+import TaskEntryForm from '../components/form';
+
 function New() {
   return (
-    <>
-
-        New
-
-    </>
+    <div className="justify-center">
+    <TaskEntryForm />
+    </div>
   );
+
+
 }
 
 export default New;
