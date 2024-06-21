@@ -6,6 +6,7 @@ import SimpleBottomNavigation from './components/bottomNav';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { grey } from '@mui/material/colors';
+import EditTask from './pages/EditPage';
 
 const darkTheme = createTheme({
   palette: {
@@ -91,11 +92,11 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/new" element={<New />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/edit/:id" element={<EditTask />} /> {/* Add this line */}
         </Routes>
       </Suspense>
       <SimpleBottomNavigation />
     </ThemeProvider>
   );
 }
-
 export default App;

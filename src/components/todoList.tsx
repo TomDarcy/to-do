@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { List, ListItem, ListItemText, ListItemIcon, Typography, Paper, Box, Container, IconButton } from '@mui/material';
 import { CheckCircle, RadioButtonUnchecked, PlayArrow, Flag, Home, Add, BarChart } from '@mui/icons-material';
 import { supabase } from '../../utils/supabase';
-
+import { useNavigate } from 'react-router-dom';
 
 
 const priorityColors = {
@@ -39,7 +39,8 @@ const PriorityFlag: React.FC<{ priority: Todo['priority'] }> = ({ priority }) =>
 
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     fetchTodos();
   }, []);
@@ -56,6 +57,10 @@ const TodoList: React.FC = () => {
     } else {
       setTodos(data || []);
     }
+  };
+
+  const handleEditTask = (id: number) => {
+    navigate(`/edit/${id}`);
   };
 
   return (
@@ -78,18 +83,20 @@ const TodoList: React.FC = () => {
           }}>
             <List>
               {todos.map((todo) => (
-                <ListItem
-                  key={todo.id}
-                  alignItems="flex-start"
-                  sx={{
-                    mb: 2,
-                    bgcolor: 'rgba(255,255,255,0.05)',
-                    borderRadius: 1,
-                    '&:hover': {
-                      bgcolor: 'rgba(255,255,255,0.1)',
-                    },
-                  }}
-                >
+                    <ListItem
+                    key={todo.id}
+                    alignItems="flex-start"
+                    sx={{
+                      mb: 2,
+                      bgcolor: 'rgba(255,255,255,0.05)',
+                      borderRadius: 1,
+                      '&:hover': {
+                        bgcolor: 'rgba(255,255,255,0.1)',
+                      },
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => handleEditTask(todo.id)}
+                  >
                   <ListItemIcon>
                     <StatusIcon status={todo.status} />
                   </ListItemIcon>
