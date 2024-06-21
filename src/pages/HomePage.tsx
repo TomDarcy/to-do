@@ -1,11 +1,13 @@
-function HomePage() {
+import TodoList from '../components/todoList';
+
+function Home() {
   return (
-    <>
-
-        Home
-
-    </>
+    <div className="justify-center">
+    <TodoList />
+    </div>
   );
+
+
 }
 
-export default HomePage;
+export default Home;
