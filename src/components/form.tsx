@@ -12,6 +12,9 @@ import {
   Container,
   SelectChangeEvent,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+
 
 interface TaskEntry {
   task: string;
@@ -22,10 +25,12 @@ interface TaskEntry {
 }
 
 const TaskEntryForm: React.FC = () => {
+  const navigate = useNavigate();
+
   const [entry, setEntry] = useState<TaskEntry>({
     task: '',
     detail: '',
-    due_date: '',
+    due_date: new Date().toISOString().split('T')[0], // Default to today's date
     priority: '',
     status: 'not_started',
   });
@@ -65,6 +70,8 @@ const TaskEntryForm: React.FC = () => {
         priority: '',
         status: 'not_started',
       });
+      navigate('/');
+
     }
   };
 
