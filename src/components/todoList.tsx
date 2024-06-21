@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { List, ListItem, ListItemText, ListItemIcon, Typography, Paper, Box, Container, IconButton, Switch, FormControlLabel } from '@mui/material';
-import { CheckCircle, RadioButtonUnchecked, PlayArrow, Flag, Home, Add, BarChart, Delete, Done } from '@mui/icons-material';
+import { CheckCircle, RadioButtonUnchecked, PlayArrow, Flag, Home, Add, BarChart, Delete, Done, AccessTime } from '@mui/icons-material';
 import { supabase } from '../../utils/supabase';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,8 +32,17 @@ const StatusIcon: React.FC<{ status: Todo['status'] }> = ({ status }) => {
   }
 };
 
-const PriorityFlag: React.FC<{ priority: Todo['priority'] }> = ({ priority }) => (
-  <Flag style={{ color: priorityColors[priority] }} />
+const isPastDue = (dueDate: string) => {
+  const currentDate = new Date();
+  const dueDateObj = new Date(dueDate);
+  return dueDateObj < currentDate;
+};
+
+const PriorityFlag: React.FC<{ priority: Todo['priority']; dueDate: string }> = ({ priority, dueDate }) => (
+  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Flag style={{ color: priorityColors[priority] }} />
+    {isPastDue(dueDate) && <AccessTime style={{ color: '#f44336', marginLeft: '4px' }} />}
+  </Box>
 );
 
 const TodoList: React.FC = () => {
@@ -138,7 +147,7 @@ const TodoList: React.FC = () => {
                     <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center' }}>
                       {todo.task}
                       <Box component="span" sx={{ ml: 1 }}>
-                        <PriorityFlag priority={todo.priority} />
+                        <PriorityFlag priority={todo.priority} dueDate={todo.due_date} />
                       </Box>
                     </Typography>
                   }
